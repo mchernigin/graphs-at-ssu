@@ -98,6 +98,10 @@ impl Graph {
         self.adjacency_list.clone()
     }
 
+    pub fn set_adjacency_list(&mut self, al: HashMap<String, HashMap<String, Option<EdgeWeight>>>) {
+        self.adjacency_list = al;
+    }
+
     /// Check if graph is weighted.
     pub fn is_weighted(&self) -> bool {
         self.is_weighted
@@ -363,18 +367,18 @@ impl Graph {
             });
         }
 
-        let node1_connections = self
-            .adjacency_list
-            .get_mut(&node1)
-            .ok_or_else(|| GraphError {
-                msg: format!("Node {node1:?} does not exist"),
-            })?;
+        // let node1_connections = self
+        //     .adjacency_list
+        //     .get_mut(&node1)
+        //     .ok_or_else(|| GraphError {
+        //         msg: format!("Node {node1:?} does not exist"),
+        //     })?;
 
-        if node1_connections.insert(node2.clone(), weight).is_some() {
-            return Err(GraphError {
-                msg: "Nodes are already connected".to_string(),
-            });
-        }
+        // if node1_connections.insert(node2.clone(), weight).is_some() {
+        //     return Err(GraphError {
+        //         msg: "Nodes are already connected".to_string(),
+        //     });
+        // }
 
         if !self.is_oriented {
             self.adjacency_list
